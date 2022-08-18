@@ -1,6 +1,6 @@
 #local docker data
-dockerdata/
-dockerdata/*
+#dockerdata/
+#dockerdata/*
 # Compiled class file
 *.class
 
