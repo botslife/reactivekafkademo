@@ -1,0 +1,35 @@
+server:
+  port: 2003
+spring:
+  devtools:
+    restart:
+      enabled: true
+      log-condition-evaluation-delta: false
+  data:
+    mongodb:
+      authentication-database: admin
+      #uri: mongodb://vlab045701.dom045700.lab:27017/reactive
+      uri: mongodb://mongodb:27017/datlabank
+      #host: localhost
+      #port: 27017
+      database: reactive
+      #password: root
+      #username: root
+  cloud:
+    function:
+      definition: consumeTransaction
+    stream:
+      kafka:
+        binder:
+          brokers: kafka:9092
+          autoCreateTopics: false
+        bindings:
+          consume-transactions:
+            consumer:
+              max-attempts: 3
+              back-off-initial-interval: 10
+            destination: transactions
+            group: reporting
+            concurrency: 1
+          user-transactions:
+            destination: transactions
